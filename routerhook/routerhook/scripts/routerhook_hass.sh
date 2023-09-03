@@ -18,7 +18,7 @@ clang_action="$1"
 if [[ "${clang_action}" == "task" ]]; then
     if [[ "${routerhook_info_silent_send}" == "0" ]]; then
         if [[ "${routerhook_silent_time}" == "1" ]]; then
-            router_now_hour=$(date "+%H")
+            router_now_hour=$(TZ=UTC-8 date "+%H")
             if [[ "${router_now_hour}" -ge "${routerhook_silent_time_start_hour}" ]] || [[ "${router_now_hour}" -lt "${routerhook_silent_time_end_hour}" ]]; then
                 [ "${routerhook_info_logger}" == "1" ] && logger "[routerhook]: 推送时间在消息免打扰时间内，推送任务通道静默！"
                 exit
@@ -205,8 +205,11 @@ if [ "${routerhook_sm_bwlist_en}" == "1" ]; then
             echo ',"value3":"'$friendly_name'"' >>${routerhook_hass_text}
             echo ',"attributes":{"unit_of_measurement":"'$unit'","friendly_name":"'$friendly_name'"}' >>${routerhook_hass_text}
             echo '}' >>${routerhook_hass_text}
-            routerhook_send_content=$(jq -c . ${routerhook_hass_text})
-            source /koolshare/scripts/routerhook_sender.sh
+            # 若开启了所有设备，则推送单个设备信息
+            if [ "${routerhook_sm_bwlist_all}" == "1" ]; then
+                routerhook_send_content=$(jq -c . ${routerhook_hass_text})
+                source /koolshare/scripts/routerhook_sender.sh
+            fi
             # 由于read line为管道模式，所以while中对union_device_value的更改不会传递到外面去，需要通过文件进行值传递
             echo $union_device_value >${routerhook_hass_text}
         done

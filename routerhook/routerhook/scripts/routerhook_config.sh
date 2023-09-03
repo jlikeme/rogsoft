@@ -7,6 +7,10 @@ remove_cron_job() {
     logger "[routerhook]: 关闭全部定时任务！"
     cru d routerhook_check >/dev/null 2>&1
     cru d routerhook_sm >/dev/null 2>&1
+    
+    sed -i '/routerhook_hass/d' /jffs/configs/dnsmasq.d/dhcp_trigger.conf
+    [ "${routerhook_info_logger}" == "1" ] && logger "[routerhook]: 移除DHCP触发器，重启DNSMASQ！"
+    service restart_dnsmasq
 }
 
 # for long message job creat
@@ -35,6 +39,14 @@ creat_cron_job() {
     if [[ -n "${routerhook_sm_cron}" ]]; then
         cru a routerhook_sm "* * * * * /koolshare/scripts/routerhook_hass_task.sh"
         logger "[routerhook]: 已创建HASS定时任务！"
+        
+        sed -i '/routerhook_hass/d' /jffs/configs/dnsmasq.d/dhcp_trigger.conf
+        echo "dhcp-script=/koolshare/scripts/routerhook_hass.sh" >>/jffs/configs/dnsmasq.d/dhcp_trigger.conf
+        [ "${routerhook_info_logger}" == "1" ] && logger "[routerhook]: 创建DHCP触发器，触发HASS，重启DNSMASQ！"
+        #service restart_dnsmasq
+        killall dnsmasq
+        sleep 1
+        dnsmasq --log-async
     fi
 }
 

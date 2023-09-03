@@ -8,7 +8,9 @@ if [ "$step" -gt 0 ]; then
     i=0
     while [ "$i" -lt 60 ]; do
         /koolshare/scripts/routerhook_hass.sh task
-        sleep $step
         i=$((i + step))
+        if [ "$i" -lt 60 ]; then
+            sleep $step
+        fi
     done
 fi

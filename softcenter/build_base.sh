@@ -17,7 +17,8 @@ do_build_result() {
 	EOF
 	
 	tar -zcvf ${MODULE}.tar.gz $MODULE
-	md5value=$(md5sum ${MODULE}.tar.gz | tr " " "\n" | sed -n 1p)
+	# md5value=$(md5sum ${MODULE}.tar.gz | tr " " "\n" | sed -n 1p)
+	md5value=$(md5 -r ${MODULE}.tar.gz | tr " " "\n" | sed -n 1p)
 	cat > ./version <<-EOF
 	${VERSION}
 	${md5value}
@@ -41,5 +42,5 @@ do_build_result() {
 	EOF
 	
 	#update md5
-	python ../softcenter/gen_install.py stage2
+	python2 ../softcenter/gen_install.py stage2
 }

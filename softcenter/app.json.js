@@ -283,18 +283,18 @@
             "version": "5.7"
         }, 
         {
-            "author": "囍冯总囍", 
-            "build_date": "2021-08-20_22:31:28", 
+            "author": "囍冯总囍/Jlikeme", 
+            "build_date": "2023-09-03_13:56:41", 
             "changelog": "", 
             "description": "从路由器推送状态及通知的工具", 
             "home_url": "Module_routerhook.asp", 
             "link": "https://koolshare.cn/thread-178114-1-1.html", 
-            "md5": "b5e09aaf317f20b53d27430bf5894e3d", 
+            "md5": "1f891f9fd1ded969e14b46315b74bdbb", 
             "name": "routerhook", 
             "tags": "推送", 
             "tar_url": "routerhook/routerhook.tar.gz", 
             "title": "RouterHook事件回调", 
-            "version": "1.2"
+            "version": "1.4"
         }, 
         {
             "author": "clang", 

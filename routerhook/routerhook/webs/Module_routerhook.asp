@@ -355,7 +355,8 @@
                 "routerhook_sm_5g1",
                 "routerhook_sm_bwlist_en",
                 "routerhook_sm_bwlist_or",
-                "routerhook_sm_bwlist_and"
+                "routerhook_sm_bwlist_and",
+                "routerhook_sm_bwlist_all"
             ];
             var params_base64 = ["routerhook_config_name", "routerhook_check_custom", "routerhook_trigger_dhcp_white",
                 "routerhook_sm_bwlist"
@@ -1460,12 +1461,15 @@
                                                 </tr>
                                                 <tr>
                                                     <th width="20%">
-                                                        在线状态（设备名：rh_dev_[mac地址]）<br><i>列表中每条mac对应一个设备</i><br><i>消息中设备名mac不含冒号</i><br><i>聚合设备开启后会多一个名为rh_dev的设备</i>
+                                                        在线状态（设备名：rh_dev_[mac地址]）<br><i>消息中设备名mac不含冒号</i><br><i>开启所有设备后，列表中每个设备都推送一次</i><br><i>聚合设备开启后会多一个名为rh_dev的设备</i>
                                                     </th>
                                                     <td>
                                                         <label><input type="checkbox" id="routerhook_sm_bwlist_en"
                                                                 name="routerhook_sm_bwlist_en"
-                                                                onclick="oncheckclick(this);">启用</label> （ 聚合设备：
+                                                                onclick="oncheckclick(this);">启用</label>
+                                                        <label><input type="checkbox" id="routerhook_sm_bwlist_all"
+                                                                name="routerhook_sm_bwlist_all"
+                                                                onclick="oncheckclick(this);">所有设备</label> （ 聚合设备：
                                                         <label><input type="checkbox" id="routerhook_sm_bwlist_or"
                                                                 name="routerhook_sm_bwlist_or"
                                                                 onclick="oncheckclick(this);">或模式</label>
