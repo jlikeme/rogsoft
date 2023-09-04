@@ -222,7 +222,7 @@ if [ "${routerhook_sm_bwlist_en}" == "1" ]; then
             echo ',"value1":"'$value'"' >>${routerhook_hass_text}
             echo ',"value2":"'$unit'"' >>${routerhook_hass_text}
             echo ',"value3":"'$friendly_name'"' >>${routerhook_hass_text}
-            echo ',"attributes":{"unit_of_measurement":"'$unit'","friendly_name":"'$friendly_name'"}' >>${routerhook_hass_text}
+            echo ',"attributes":{"friendly_name":"'$friendly_name'"}' >>${routerhook_hass_text}
             echo '}' >>${routerhook_hass_text}
             routerhook_send_content=$(jq -c . ${routerhook_hass_text})
             source /koolshare/scripts/routerhook_sender.sh
