@@ -175,7 +175,7 @@ fi
 
 # 设备在线状态
 if [ "${routerhook_sm_bwlist_en}" == "1" ]; then
-    [[ "${routerhook_sm_bwlist_and}" == "1" ]] && union_device_value="ON" || union_device_value="OFF"
+    [[ "${routerhook_sm_bwlist_and}" == "1" ]] && union_device_value="on" || union_device_value="off"
     unit='OL'
     # 获取用户配置的设备mac列表（全部转为小写）
     bwlist=$(dbus get routerhook_sm_bwlist | base64_decode | cut -d# -f2)
@@ -184,18 +184,18 @@ if [ "${routerhook_sm_bwlist_en}" == "1" ]; then
             msg_type="rh_dev_${line//:/}"
             friendly_name="Router Device ${line}"
             arp_check=$(arp | grep "br0" | grep -v "incomplete" | grep -i "${line}")
-            [[ "${arp_check}" == "" ]] && value="OFF" || value="ON"
+            [[ "${arp_check}" == "" ]] && value="off" || value="on"
             if [ "${routerhook_sm_bwlist_or}" == "1" ]; then
-                if [ "${union_device_value}" == "ON" ] || [ "${value}" == "ON" ]; then
-                    union_device_value="ON"
+                if [ "${union_device_value}" == "on" ] || [ "${value}" == "on" ]; then
+                    union_device_value="on"
                 else
-                    union_device_value="OFF"
+                    union_device_value="off"
                 fi
             else
-                if [ "${union_device_value}" == "ON" ] && [ "${value}" == "ON" ]; then
-                    union_device_value="ON"
+                if [ "${union_device_value}" == "on" ] && [ "${value}" == "on" ]; then
+                    union_device_value="on"
                 else
-                    union_device_value="OFF"
+                    union_device_value="off"
                 fi
             fi
             echo '{' >${routerhook_hass_text}
